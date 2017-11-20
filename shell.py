@@ -1,17 +1,17 @@
 def shell(l):
   split = len(l) // 2
-  print(split)
-  while split < 0:
+  while split > 0:
     for start in range(split):
       gapInsertion(l, start, split)
-    split = split //2
+    split = split // 2
+  return l
 
 def gapInsertion(l, s, e):
-  for n in range(1, len(l)):
+  for n in range(s+e, len(l), e):
     c = l[n]
     p = n
-    while p > 0 and l[p-1] > c:
-      l[p] = l[p-1]
-      p = p-1
+    while p >= e and l[p-e] > c:
+      l[p] = l[p-e]
+      p = p-e
     l[p] = c
   return l

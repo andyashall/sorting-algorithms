@@ -5,7 +5,7 @@ from insertion import insertion
 from shell import shell
 import time
 
-l = [4,3,2,6,5,4,9,8,7,5,4,3,1,10,7,2]
+l = [4,3,2,6,5,4,9,8,7,5,4,3,1,10,7,2,11]
 
 start = time.time()
 
