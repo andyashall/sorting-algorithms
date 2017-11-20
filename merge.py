@@ -23,10 +23,3 @@ def merge(l):
       j+=1
       k+=1
   return l
-
-def split(l):
-  if len(l) > 1:
-    split = len(l) // 2
-    left = l[0:split]
-    right = l[split:len(l)]
-    return left, right
