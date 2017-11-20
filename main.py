@@ -1,5 +1,5 @@
-import time
-import random
+from time import time
+from random import random
 
 from bubble import bubble
 from selection import selection
@@ -8,12 +8,12 @@ from insertion import insertion
 from shell import shell
 from merge import merge
 
-l = [int(1000*random.random()) for i in range(10000)]
+l = [int(1000*random()) for i in range(10000)]
 
-start = time.time()
+start = time()
 
 print(quicksort(l))
 
-end = time.time()
+end = time()
 
 print('Time taken: {0:.8f}'.format(end - start))
