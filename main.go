@@ -6,13 +6,10 @@ import (
 )
 
 func bubble(list []int) []int {
-  swaped := true
-  for swaped {
-    swaped = false
+  for n := len(list) -1; n >= 0; n-- {
     for i := 0; i < len(list) -1; i++ {
       if list[i] > list[i + 1] {
         list[i], list[i+1] = list[i+1], list[i]
-        swaped = true
       }
     }
   }
@@ -48,6 +45,6 @@ func insertion(list []int) []int {
 func main() {
   var list []int
   for i := 0; i < 10000; i++ {list = append(list, rand.Intn(10000))}
-  sorted := insertion(list)
+  sorted := bubble(list)
   fmt.Println(sorted)
 }
