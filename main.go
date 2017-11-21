@@ -32,9 +32,22 @@ func selection(list []int) []int {
   return list
 }
 
+func insertion(list []int) []int {
+  for n := 1; n < len(list); n++ {
+    c := list[n]
+    p := n
+    for p > 0 && list[p-1] > c {
+      list[p] = list[p-1]
+      p--
+    }
+    list[p] = c
+  }
+  return list
+}
+
 func main() {
   var list []int
   for i := 0; i < 1000; i++ {list = append(list, rand.Intn(100))}
-  sorted := selection(list)
+  sorted := insertion(list)
   fmt.Println(sorted)
 }
