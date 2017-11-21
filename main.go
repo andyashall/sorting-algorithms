@@ -47,7 +47,7 @@ func insertion(list []int) []int {
 
 func main() {
   var list []int
-  for i := 0; i < 1000; i++ {list = append(list, rand.Intn(100))}
+  for i := 0; i < 10000; i++ {list = append(list, rand.Intn(10000))}
   sorted := insertion(list)
   fmt.Println(sorted)
 }
