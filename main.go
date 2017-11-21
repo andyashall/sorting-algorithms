@@ -42,9 +42,18 @@ func insertion(list []int) []int {
   return list
 }
 
+func mean(list []int) int {
+  var o int
+  for i := 0; i < len(list); i++ {
+    o = o + list[i] 
+  }
+  return o / len(list)
+}
+
 func main() {
   var list []int
   for i := 0; i < 10000; i++ {list = append(list, rand.Intn(10000))}
-  sorted := bubble(list)
-  fmt.Println(sorted)
+  // sorted := bubble(list)
+  mean := mean(list)
+  fmt.Println(mean)
 }
