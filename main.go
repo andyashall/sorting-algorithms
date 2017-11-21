@@ -19,9 +19,23 @@ func bubble(list []int) []int {
   return list
 }
 
+func selection(list []int) []int {
+  for n := len(list) - 1; n == 0; n-- {
+    fmt.Println(n)
+    larg := 0
+    for i := 0; i < n; i++ {
+      if list[i] > list[larg] {
+        larg = i
+      }
+    }
+    list[n], list[larg] = list[larg], list[n]
+  }
+  return list
+}
+
 func main() {
   var list []int
   for i := 0; i < 1000; i++ {list = append(list, rand.Intn(100))}
-  sorted := bubble(list)
+  sorted := selection(list)
   fmt.Println(sorted)
 }
