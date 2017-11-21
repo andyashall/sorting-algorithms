@@ -20,8 +20,7 @@ func bubble(list []int) []int {
 }
 
 func selection(list []int) []int {
-  for n := len(list) - 1; n == 0; n-- {
-    fmt.Println(n)
+  for n := len(list) - 1; n >= 0; n-- {
     larg := 0
     for i := 0; i < n; i++ {
       if list[i] > list[larg] {
