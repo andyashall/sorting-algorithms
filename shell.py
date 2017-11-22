@@ -1,6 +1,5 @@
 def shell(l):
   split = len(l) // 2
-  print(split)
   while split > 0:
     for start in range(split):
       gapInsertion(l, start, split)
