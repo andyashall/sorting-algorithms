@@ -1,12 +1,12 @@
 module Main where
 
 import System.Random.Shuffle
-import Data.List (delete)
+import Data.List (delete, insert)
 
 main :: IO () 
 main = do
   ran <- shuffleM [1..100] 
-  putStrLn $ show (selectionSort ran)
+  putStrLn $ show (insertionSort ran)
 
 bubble :: [Int] -> [Int]
 bubble l = bubbleSort l 0 ((length l) -1)
@@ -30,3 +30,6 @@ selectionSort [] = []
 selectionSort l = m:(selectionSort e)
                   where m = minimum l
                         e = delete m l
+
+insertionSort :: Ord a => [a] -> [a]
+insertionSort = foldr insert []

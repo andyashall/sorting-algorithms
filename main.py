@@ -12,7 +12,7 @@ l = [int(1000*random()) for i in range(10000)]
 
 start = time()
 
-print(quicksort(l))
+print(shell(l))
 
 end = time()
 

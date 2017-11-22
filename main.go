@@ -42,6 +42,30 @@ func insertion(list []int) []int {
   return list
 }
 
+func shell(list []int) []int {
+  split := int(len(list) / 2)
+  for split > 0 {
+    for i := 0; i < len(list); i++ {
+      gapInsertion(list, i, split)
+    }
+    split = int(split / 2)
+  }
+  return list
+}
+
+func gapInsertion(l []int, s int, e int) []int {
+  for n := s+e; n < len(l); n+=e {
+    c := l[n]
+    p := n
+    for p >= e && l[p-e] > c {
+      l[p] = l[p-e]
+      p = p-e
+    }
+    l[p] = c
+  }
+  return l
+}
+
 func mean(list []int) int {
   var o int
   for i := 0; i < len(list); i++ {
@@ -53,7 +77,7 @@ func mean(list []int) int {
 func main() {
   var list []int
   for i := 0; i < 10000; i++ {list = append(list, rand.Intn(10000))}
-  sorted := bubble(list)
+  sorted := shell(list)
   // mean := mean(list)
-  fmt.Println(mean)
+  fmt.Println(sorted)
 }
