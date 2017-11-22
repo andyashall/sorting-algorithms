@@ -5,7 +5,7 @@ import System.Random.Shuffle
 main :: IO () 
 main = do
   ran <- shuffleM [1..100] 
-  putStrLn $ show (bubble ran)
+  putStrLn $ show (selectionSort ran)
 
 bubble :: [Int] -> [Int]
 bubble l = bubbleSort l 0 ((length l) -1)
@@ -23,3 +23,9 @@ bubbleSort l n e
           right = drop (n+2) l
       in bubbleSort (left ++ [j] ++ [i] ++ right) (n+1) e
     else bubbleSort l (n+1) e
+
+selectionSort :: (Ord a) => [a] -> [a]
+selectionSort [] = []
+selectionSort l = m : (selectionSort e)
+                   where m = minimum l
+                         e = drop m l
