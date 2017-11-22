@@ -1,6 +1,7 @@
 module Main where
 
 import System.Random.Shuffle
+import Data.List (delete)
 
 main :: IO () 
 main = do
@@ -26,6 +27,6 @@ bubbleSort l n e
 
 selectionSort :: (Ord a) => [a] -> [a]
 selectionSort [] = []
-selectionSort l = m : (selectionSort e)
-                   where m = minimum l
-                         e = drop m l
+selectionSort l = m:(selectionSort e)
+                  where m = minimum l
+                        e = delete m l
