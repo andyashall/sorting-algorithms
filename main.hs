@@ -8,7 +8,7 @@ main = do
   putStrLn $ show (bubble ran)
 
 bubble :: [Int] -> [Int]
-bubble l = bubbleSort l 0 (length l)
+bubble l = bubbleSort l 0 ((length l) -1)
 
 bubbleSort :: [Int] -> Int -> Int -> [Int]
 bubbleSort l n e
@@ -19,7 +19,7 @@ bubbleSort l n e
     then 
       let i = l !! n
           j = l !! (n+1)
-          left = take (n-1) l
-          right = drop (n+1) l
+          left = take n l
+          right = drop (n+2) l
       in bubbleSort (left ++ [j] ++ [i] ++ right) (n+1) e
     else bubbleSort l (n+1) e
