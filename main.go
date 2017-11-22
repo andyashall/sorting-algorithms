@@ -53,7 +53,7 @@ func mean(list []int) int {
 func main() {
   var list []int
   for i := 0; i < 10000; i++ {list = append(list, rand.Intn(10000))}
-  // sorted := bubble(list)
-  mean := mean(list)
+  sorted := bubble(list)
+  // mean := mean(list)
   fmt.Println(mean)
 }
