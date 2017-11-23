@@ -66,6 +66,38 @@ func gapInsertion(l []int, s int, e int) []int {
   return l
 }
 
+func merge(list []int) []int {
+  if len(list) > 1 {
+    split := int(len(list) / 2)
+    left := list[:split]
+    right := list[split:]
+    merge(left)
+    merge(right)
+    i, j, k := 0, 0, 0
+    for i < len(left) && j < len(right) {
+      if left[i] < right[j] {
+        list[k] = left[i]
+        i++
+      } else {
+        list[k] = right[j]
+        j++
+      }
+    }
+    for i < len(left) {
+      list[k] = left[i]
+      i++
+      k++
+    }
+    for j < len(right) {
+      list[k] = right[j]
+      j++
+      k++
+    }
+    return list
+  }
+  return list
+}
+
 func mean(list []int) int {
   var o int
   for i := 0; i < len(list); i++ {
@@ -77,7 +109,7 @@ func mean(list []int) int {
 func main() {
   var list []int
   for i := 0; i < 10000; i++ {list = append(list, rand.Intn(10000))}
-  sorted := shell(list)
+  sorted := merge(list)
   // mean := mean(list)
   fmt.Println(sorted)
 }
