@@ -6,7 +6,7 @@ import Data.List (delete, insert)
 main :: IO () 
 main = do
   ran <- shuffleM [1..1000] 
-  putStrLn $ show (mergeSort ran)
+  putStrLn $ show (quickSort ran)
 
 bubble :: [Int] -> [Int]
 bubble l = bubbleSort l 0 ((length l) -1)
@@ -31,9 +31,16 @@ selectionSort l = m : (selectionSort e)
                   where m = minimum l
                         e = delete m l
 
-insertionSort :: Ord a => [a] -> [a]
+insertionSort :: (Ord a) => [a] -> [a]
 insertionSort = foldr insert []
 
-mergeSort :: Ord a => [a] -> [a]
+mergeSort :: (Ord a) => [a] -> [a]
 mergeSort (x:xs) = mergeSort (filter (<=x) xs) ++ [x] ++ mergeSort (filter (>x) xs)
 mergeSort xs     = xs
+
+quickSort :: (Ord a) => [a] -> [a]  
+quickSort [] = []  
+quickSort (x:xs) =   
+    let smallerSorted = quicksort [a | a <- xs, a <= x]  
+        biggerSorted = quicksort [a | a <- xs, a > x]  
+    in  smallerSorted ++ [x] ++ biggerSorted  

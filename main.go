@@ -98,6 +98,61 @@ func merge(list []int) []int {
   return list
 }
 
+func quickSort(list []int) []int {
+  if len(list) < 2 {
+    return list
+  } else {
+    var lower []int
+    var higher []int
+    x := list[int(len(list) / 2)]
+    for i := 0; i < len(list); i++ {
+      if list[i] < list[x] {
+        lower = append(lower, list[i])
+        quickSort(lower)
+      } else {
+        higher = append(higher, list[i])
+        quickSort(higher)
+      }
+    }
+    lower = append(lower, x)
+    lower = append(lower, higher...)
+    return lower
+  }
+}
+
+func quick(list []int) []int {
+  return qs(list, 0, len(list)-1)
+}
+
+func qs(list []int, left int, right int) []int {
+  if left < right {
+    part, list := partition(list, left, right)
+    qs(list, left, part - 1)
+    qs(list, part + 1, right)
+  }
+  return list
+}
+
+func partition(list []int, left int, right int) (int, []int) {
+  l := left+1
+  r := right
+  done := false
+  for done == false {
+    for l <= r && list[l] <= list[left] {
+      l++
+    }
+    for list[r] >= list[left] && r >= l {
+      r--
+    }
+    if r < l {
+      done = true
+    } else {
+      list[l], list[r] = list[r], list[l]
+    }
+  }
+  return r, list
+}
+
 func mean(list []int) int {
   var o int
   for i := 0; i < len(list); i++ {
@@ -109,7 +164,7 @@ func mean(list []int) int {
 func main() {
   var list []int
   for i := 0; i < 10000; i++ {list = append(list, rand.Intn(10000))}
-  sorted := merge(list)
+  sorted := quickSort(list)
   // mean := mean(list)
   fmt.Println(sorted)
 }
