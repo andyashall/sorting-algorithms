@@ -126,14 +126,15 @@ func quick(list []int) []int {
 
 func qs(list []int, left int, right int) []int {
   if left < right {
-    part, list := partition(list, left, right)
+    // part, list := partition(list, left, right)
+    part := partition(list, left, right)
     qs(list, left, part - 1)
     qs(list, part + 1, right)
   }
   return list
 }
 
-func partition(list []int, left int, right int) (int, []int) {
+func partition(list []int, left int, right int) int {
   l := left+1
   r := right
   done := false
@@ -150,7 +151,7 @@ func partition(list []int, left int, right int) (int, []int) {
       list[l], list[r] = list[r], list[l]
     }
   }
-  return r, list
+  return r
 }
 
 func mean(list []int) int {
@@ -164,7 +165,7 @@ func mean(list []int) int {
 func main() {
   var list []int
   for i := 0; i < 10000; i++ {list = append(list, rand.Intn(10000))}
-  sorted := quickSort(list)
+  sorted := quick(list)
   // mean := mean(list)
   fmt.Println(sorted)
 }
