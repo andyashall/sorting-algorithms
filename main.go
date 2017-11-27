@@ -99,13 +99,12 @@ func merge(list []int) []int {
 }
 
 func quickSort(list []int) []int {
-  if len(list) < 2 {
-    return list
-  } else {
+  if len(list) > 2 {
     var lower []int
     var higher []int
     x := list[int(len(list) / 2)]
-    for i := 0; i < len(list); i++ {
+    fmt.Println(x)
+    for i := 0; i < len(list)-1; i++ {
       if list[i] < list[x] {
         lower = append(lower, list[i])
         quickSort(lower)
@@ -117,6 +116,8 @@ func quickSort(list []int) []int {
     lower = append(lower, x)
     lower = append(lower, higher...)
     return lower
+  } else {
+    return list
   }
 }
 
@@ -145,7 +146,8 @@ func partition(list []int, left int, right int) int {
     for list[r] >= list[left] && r >= l {
       r--
     }
-    if r < l {
+    if r <= l {
+      fmt.Println("done")
       done = true
     } else {
       list[l], list[r] = list[r], list[l]
@@ -165,7 +167,7 @@ func mean(list []int) int {
 func main() {
   var list []int
   for i := 0; i < 10000; i++ {list = append(list, rand.Intn(10000))}
-  sorted := quick(list)
+  sorted := quickSort(list)
   // mean := mean(list)
-  fmt.Println(sorted)
+  fmt.Println(sorted[0])
 }
