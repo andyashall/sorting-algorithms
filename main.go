@@ -105,8 +105,10 @@ func quickSort(list []int) []int {
     x := list[int(len(list) / 2)]
     fmt.Println(x)
     for i := 0; i < len(list)-1; i++ {
+      fmt.Println(list[x])
       if list[i] < list[x] {
         lower = append(lower, list[i])
+        fmt.Println(lower)
         quickSort(lower)
       } else {
         higher = append(higher, list[i])
