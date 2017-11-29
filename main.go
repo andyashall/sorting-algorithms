@@ -3,6 +3,7 @@ package main
 import (
   "fmt"
   "math/rand"
+  // "sort"
 )
 
 func bubble(list []int) []int {
@@ -129,7 +130,6 @@ func quick(list []int) []int {
 
 func qs(list []int, left int, right int) []int {
   if left < right {
-    // part, list := partition(list, left, right)
     part := partition(list, left, right)
     qs(list, left, part - 1)
     qs(list, part + 1, right)
@@ -138,6 +138,8 @@ func qs(list []int, left int, right int) []int {
 }
 
 func partition(list []int, left int, right int) int {
+  pi := int(len(list) / 2)
+  list[left], list[pi] = list[pi], list[left]
   l := left+1
   r := right
   done := false
@@ -149,7 +151,6 @@ func partition(list []int, left int, right int) int {
       r--
     }
     if r <= l {
-      fmt.Println("done")
       done = true
     } else {
       list[l], list[r] = list[r], list[l]
@@ -169,7 +170,7 @@ func mean(list []int) int {
 func main() {
   var list []int
   for i := 0; i < 10000; i++ {list = append(list, rand.Intn(10000))}
-  sorted := quickSort(list)
+  sorted := quick(list)
   // mean := mean(list)
-  fmt.Println(sorted[0])
+  fmt.Println(sorted)
 }
