@@ -6,7 +6,7 @@ import Data.List (delete, insert, transpose, insert, unfoldr)
 main :: IO () 
 main = do
   ran <- shuffleM [1..1000] 
-  putStrLn $ show (shellSort ran)
+  putStrLn $ show (quickSort ran)
 
 bubble :: [Int] -> [Int]
 bubble l = bubbleSort l 0 ((length l) -1)
@@ -17,12 +17,7 @@ bubbleSort l n e
   | e <= 0 = l
   | otherwise = 
     if l!!n > l!!(n+1)
-    then 
-      let i = l !! n
-          j = l !! (n+1)
-          left = take n l
-          right = drop (n+2) l
-      in bubbleSort (left ++ [j] ++ [i] ++ right) (n+1) e
+    then bubbleSort ((take n l) ++ [l!!(n+1)] ++ [l!!n] ++ (drop (n+2) l)) (n+1) e
     else bubbleSort l (n+1) e
 
 selectionSort :: (Ord a) => [a] -> [a]
