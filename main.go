@@ -129,7 +129,7 @@ func quick(list []int) []int {
 }
 
 func qs(list []int, left int, right int) []int {
-  if left < right {
+  if left <= right {
     part := partition(list, left, right)
     qs(list, left, part - 1)
     qs(list, part + 1, right)
@@ -138,8 +138,6 @@ func qs(list []int, left int, right int) []int {
 }
 
 func partition(list []int, left int, right int) int {
-  pi := int(len(list) / 2)
-  list[left], list[pi] = list[pi], list[left]
   l := left+1
   r := right
   done := false
@@ -156,6 +154,7 @@ func partition(list []int, left int, right int) int {
       list[l], list[r] = list[r], list[l]
     }
   }
+  list[left], list[r] = list[r], list[left]
   return r
 }
 
