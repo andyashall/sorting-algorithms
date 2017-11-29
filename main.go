@@ -99,31 +99,6 @@ func merge(list []int) []int {
   return list
 }
 
-func quickSort(list []int) []int {
-  if len(list) > 2 {
-    var lower []int
-    var higher []int
-    x := list[int(len(list) / 2)]
-    fmt.Println(x)
-    for i := 0; i < len(list)-1; i++ {
-      fmt.Println(list[x])
-      if list[i] < list[x] {
-        lower = append(lower, list[i])
-        fmt.Println(lower)
-        quickSort(lower)
-      } else {
-        higher = append(higher, list[i])
-        quickSort(higher)
-      }
-    }
-    lower = append(lower, x)
-    lower = append(lower, higher...)
-    return lower
-  } else {
-    return list
-  }
-}
-
 func quick(list []int) []int {
   return qs(list, 0, len(list)-1)
 }
@@ -170,6 +145,5 @@ func main() {
   var list []int
   for i := 0; i < 10000; i++ {list = append(list, rand.Intn(10000))}
   sorted := quick(list)
-  // mean := mean(list)
   fmt.Println(sorted)
 }
