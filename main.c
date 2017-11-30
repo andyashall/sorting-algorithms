@@ -2,12 +2,11 @@
 #include <stdlib.h>
 
 void qs(int *list, int len);
-
 void bubble(int *list, int len);
-
 void selection(int *list, int len);
-
 void insertion(int *list, int len);
+void shell(int *list, int len);
+void gapInsert(int *list, int s, int e, int l);
 
 int main (void) {
   int list[10000];
@@ -18,7 +17,7 @@ int main (void) {
     list[i] = rand() / 1000000;
   }
   // qs(list, n);
-  insertion(list, n);
+  bubble(list, n);
   for (i = 0; i < n; i++) {
     printf("%d ", list[i]);
   }
@@ -62,6 +61,30 @@ void insertion(int *list, int len) {
     while (p > 0 && list[p-1] > c) {
       list[p] = list[p-1];
       p--;
+    }
+    list[p] = c;
+  }
+}
+
+void shell(int *list, int len) {
+  int split = len / 2;
+  int i;
+  while (split > 0) {
+    for (i = 0; i < len; i++) {
+      gapInsert(list, i, split, len);
+    }
+    split = split / 2;
+  }
+}
+
+void gapInsert(int *list, int s, int e, int l) {
+  int n, p, c;
+  for (n = s+e; n < l; n+=e) {
+    c = list[n];
+    p = n;
+    while (p >= e && list[p-e] > c) {
+      list[p] = list[p-e];
+      p-=e;
     }
     list[p] = c;
   }
