@@ -7,6 +7,8 @@ void bubble(int *list, int len);
 
 void selection(int *list, int len);
 
+void insertion(int *list, int len);
+
 int main (void) {
   int list[10000];
   srand(0);
@@ -16,7 +18,7 @@ int main (void) {
     list[i] = rand() / 1000000;
   }
   // qs(list, n);
-  selection(list, n);
+  insertion(list, n);
   for (i = 0; i < n; i++) {
     printf("%d ", list[i]);
   }
@@ -49,6 +51,19 @@ void selection(int *list, int len) {
     int tmp = list[n];
     list[n] = list[l];
     list[l] = tmp;
+  }
+}
+
+void insertion(int *list, int len) {
+  int n, c, p;
+  for (n = 0; n < len; n++) {
+    c = list[n];
+    p = n;
+    while (p > 0 && list[p-1] > c) {
+      list[p] = list[p-1];
+      p--;
+    }
+    list[p] = c;
   }
 }
 
