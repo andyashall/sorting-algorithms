@@ -7,6 +7,7 @@ void selection(int *list, int len);
 void insertion(int *list, int len);
 void shell(int *list, int len);
 void gapInsert(int *list, int s, int e, int l);
+void merge(int *list, int len);
 
 int main (void) {
   int list[10000];
@@ -87,6 +88,38 @@ void gapInsert(int *list, int s, int e, int l) {
       p-=e;
     }
     list[p] = c;
+  }
+}
+
+void merge(int *list, int len) {
+  if (len >= 1) {
+    int split = len / 2;
+    int left = list[0:split];
+    int right = list[split:len];
+    int llen = sizeof left / sizeof left[0];
+    int rlen = sizeof right / sizeof right[0];
+    merge(left, llen);
+    merge(right, rlen);
+    int i, j, k = 0;
+    while (i < llen && j < rlen) {
+      if (left[i] < right[j]) {
+        list[k] = left[i];
+        i++;
+      } else {
+        list[k] = right[j];
+        j++;
+      }
+    }
+    while (i < llen) {
+      list[k] = left[i];
+      i++;
+      k++;
+    }
+    while (j < rlen) {
+      list[k] = right[j];
+      j++;
+      k++;
+    }
   }
 }
 
