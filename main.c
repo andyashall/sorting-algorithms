@@ -8,7 +8,8 @@ void selection(int *list, int len);
 void insertion(int *list, int len);
 void shell(int *list, int len);
 void gapInsert(int *list, int s, int e, int l);
-void merge(int *list, int len);
+void mergeSort (int *a, int n, int m);
+void merge (int *a, int n);
 
 int main (void) {
   int list[10000];
@@ -91,41 +92,28 @@ void gapInsert(int *list, int s, int e, int l) {
   }
 }
 
-void merge(int *list, int len) {
-  if (len > 1) {
-    int split = len / 2;
-    int *left = malloc(split * sizeof list[0]);
-    int *right = malloc(split * sizeof list[0]);
-    memcpy(left, list, split * sizeof list[0]);
-    memcpy(right, list + split, split * sizeof list[0]);
-    int llen = sizeof left / sizeof left[0];
-    int rlen = sizeof right / sizeof right[0];
-
-    printf("%d ", llen);
-
-    merge(left, llen);
-    merge(right, rlen);
-    int i, j, k = 0;
-    while (i < llen && j < rlen) {
-      if (left[i] < right[j]) {
-        list[k] = left[i];
-        i++;
-      } else {
-        list[k] = right[j];
-        j++;
-      }
-    }
-    while (i < llen) {
-      list[k] = left[i];
-      i++;
-      k++;
-    }
-    while (j < rlen) {
-      list[k] = right[j];
-      j++;
-      k++;
-    }
+void mergeSort (int *a, int n, int m) {
+  int i, j, k;
+  int *x = malloc(n * sizeof a[0]);
+  for (i = 0, j = m, k = 0; k < n; k++) {
+    x[k] = j == n      ? a[i++]
+         : i == m      ? a[j++]
+         : a[j] < a[i] ? a[j++]
+         :               a[i++];
   }
+  for (i = 0; i < n; i++) {
+    a[i] = x[i];
+  }
+  free(x);
+}
+ 
+void merge (int *a, int n) {
+  if (n < 2)
+    return;
+  int m = n / 2;
+  merge(a, m);
+  merge(a + m, n - m);
+  mergeSort(a, n, m);
 }
 
 void qs(int *list, int len) {
