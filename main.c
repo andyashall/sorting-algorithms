@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void qs(int *list, int len);
 void bubble(int *list, int len);
@@ -17,8 +18,7 @@ int main (void) {
   for (i = 0; i < n; i++) {
     list[i] = rand() / 1000000;
   }
-  // qs(list, n);
-  bubble(list, n);
+  merge(list, n);
   for (i = 0; i < n; i++) {
     printf("%d ", list[i]);
   }
@@ -92,12 +92,17 @@ void gapInsert(int *list, int s, int e, int l) {
 }
 
 void merge(int *list, int len) {
-  if (len >= 1) {
+  if (len > 1) {
     int split = len / 2;
-    int left = list[0:split];
-    int right = list[split:len];
+    int *left = malloc(split * sizeof list[0]);
+    int *right = malloc(split * sizeof list[0]);
+    memcpy(left, list, split * sizeof list[0]);
+    memcpy(right, list + split, split * sizeof list[0]);
     int llen = sizeof left / sizeof left[0];
     int rlen = sizeof right / sizeof right[0];
+
+    printf("%d ", llen);
+
     merge(left, llen);
     merge(right, rlen);
     int i, j, k = 0;
